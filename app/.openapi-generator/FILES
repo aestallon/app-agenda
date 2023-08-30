@@ -1,0 +1,6 @@
+src/main/java/hu/aestallon/agenda/app/rest/api/AgendaApi.java
+src/main/java/hu/aestallon/agenda/app/rest/api/AgendaApiController.java
+src/main/java/hu/aestallon/agenda/app/rest/api/AgendaApiDelegate.java
+src/main/java/hu/aestallon/agenda/app/rest/api/ApiUtil.java
+src/main/java/hu/aestallon/agenda/app/rest/model/Task.java
+src/main/java/org/openapitools/RFC3339DateFormat.java
