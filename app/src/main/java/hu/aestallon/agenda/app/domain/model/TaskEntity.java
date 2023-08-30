@@ -22,7 +22,7 @@ public record TaskEntity(
     this.description = description == null ? "" : description;
     this.completed = completed;
     this.important = important;
-    this.createdAt = createdAt;
+    this.createdAt = createdAt == null ? LocalDateTime.now() : createdAt;
   }
 
   public TaskEntity(String title, String description, boolean completed, boolean important,

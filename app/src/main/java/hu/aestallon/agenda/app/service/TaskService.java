@@ -18,7 +18,7 @@ public class TaskService {
 
   private final TaskRepository taskRepository;
 
-  private static Task entityToDto(TaskEntity e) {
+  private static Task dtoFromEntity(TaskEntity e) {
     return new Task()
         .id(e.id())
         .title(e.title())
@@ -27,11 +27,11 @@ public class TaskService {
         .important(e.important());
   }
 
-  private static TaskEntity dtoToEntity(Task t) {
-    return dtoToEntity(t, LocalDateTime.now());
+  private static TaskEntity entityFromDto(Task t) {
+    return entityFromDto(t, LocalDateTime.now());
   }
 
-  private static TaskEntity dtoToEntity(Task t, LocalDateTime createdAt) {
+  private static TaskEntity entityFromDto(Task t, LocalDateTime createdAt) {
     Objects.requireNonNull(t, "task cannot be null!");
     Objects.requireNonNull(createdAt, "creation date cannot be null!");
 
@@ -51,13 +51,13 @@ public class TaskService {
 
   public List<Task> getAllTasks() {
     return Streamable.of(taskRepository.findAll()).stream()
-        .map(TaskService::entityToDto)
+        .map(TaskService::dtoFromEntity)
         .toList();
   }
 
   public Task createTask(Task task) {
-    final var e = dtoToEntity(task);
-    return entityToDto(taskRepository.save(e));
+    final var e = entityFromDto(task);
+    return dtoFromEntity(taskRepository.save(e));
   }
 
   public Optional<Task> updateTask(Long taskId, Task task) {
@@ -70,9 +70,9 @@ public class TaskService {
 
     return taskRepository
         .findCreationDateById(taskId)
-        .map(creationDate -> dtoToEntity(task.id(taskId), creationDate))
+        .map(creationDate -> entityFromDto(task.id(taskId), creationDate))
         .map(taskRepository::save)
-        .map(TaskService::entityToDto);
+        .map(TaskService::dtoFromEntity);
 
   }
 
