@@ -58,7 +58,7 @@ public interface AgendaApi {
         produces = { "application/json" },
         consumes = { "application/json" }
     )
-    default ResponseEntity<List<Task>> createTask(
+    default ResponseEntity<Task> createTask(
         @Parameter(name = "Task", description = "", required = true) @Valid @RequestBody Task task
     ) {
         return getDelegate().createTask(task);
@@ -147,7 +147,7 @@ public interface AgendaApi {
         produces = { "application/json" },
         consumes = { "application/json" }
     )
-    default ResponseEntity<List<Task>> updateTask(
+    default ResponseEntity<Task> updateTask(
         @Parameter(name = "id", description = "", required = true) @PathVariable("id") Long id,
         @Parameter(name = "Task", description = "", required = true) @Valid @RequestBody Task task
     ) {

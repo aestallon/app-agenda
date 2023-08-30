@@ -31,7 +31,7 @@ public interface AgendaApiDelegate {
      * @return Ok (status code 200)
      * @see AgendaApi#createTask
      */
-    default ResponseEntity<List<Task>> createTask(Task task) {
+    default ResponseEntity<Task> createTask(Task task) {
         getRequest().ifPresent(request -> {
             for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
                 if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
@@ -90,7 +90,7 @@ public interface AgendaApiDelegate {
      *         or Unknown task (status code 404)
      * @see AgendaApi#updateTask
      */
-    default ResponseEntity<List<Task>> updateTask(Long id,
+    default ResponseEntity<Task> updateTask(Long id,
         Task task) {
         getRequest().ifPresent(request -> {
             for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
