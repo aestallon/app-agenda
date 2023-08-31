@@ -1,7 +1,11 @@
 <template>
-  <HelloWorld />
+  <p>Hello world!</p>
 </template>
 
 <script lang="ts" setup>
-  import HelloWorld from '@/components/HelloWorld.vue'
+import { taskServiceKey } from "@/services";
+import { inject } from "vue";
+import TaskService from "@/services/task.service";
+
+const taskService: TaskService | undefined = inject(taskServiceKey);
 </script>

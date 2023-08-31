@@ -50,23 +50,23 @@ tasks.named('test') {
   useJUnitPlatform()
 }
 
-// tasks.register(processFrontendResourcesTask, Copy) {
-//   def frontendBuildDir = file("${project(':giannitsa-ui-vue').buildDir}/../dist")
-//   def appResourcesDir = file("${project.buildDir}/resources/main/static")
-//
-//   group 'frontend'
-//   description 'process frontend resources'
-//   dependsOn project(':giannitsa-ui-vue').tasks.named('assembleFrontend')
-//
-//   println "copying frontend resources from [ $frontendBuildDir ] to [ $appResourcesDir ]"
-//
-//   from frontendBuildDir
-//   into appResourcesDir
-// }
-//
-// tasks.named('processResources') {
-//   dependsOn tasks.named(processFrontendResourcesTask)
-// }
+tasks.register('processFrontendResources', Copy) {
+  def frontendBuildDir = file("${project(':agenda-ui-vue').buildDir}/../dist")
+  def appResourcesDir = file("${project.buildDir}/resources/main/static")
+
+  group 'frontend'
+  description 'process frontend resources'
+  dependsOn project(':agenda-ui-vue').tasks.named('assembleFrontend')
+
+  println "copying frontend resources from [ $frontendBuildDir ] to [ $appResourcesDir ]"
+
+  from frontendBuildDir
+  into appResourcesDir
+}
+
+tasks.named('processResources') {
+  dependsOn tasks.named('processFrontendResources')
+}
 
 openApiGenerate {
   generatorName = "spring"

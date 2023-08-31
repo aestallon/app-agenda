@@ -2,3 +2,6 @@ rootProject.name = 'app-agenda'
 
 include 'agenda-app-server'
 project (':agenda-app-server').projectDir = file('app')
+
+include 'agenda-ui-vue'
+project(':agenda-ui-vue').projectDir = file('vue')
